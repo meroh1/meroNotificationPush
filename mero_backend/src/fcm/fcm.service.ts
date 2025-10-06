@@ -4,9 +4,7 @@ import { join } from 'path';
 
 const TARGET_TOKENS: string[] = [
   // Reemplaza con tokens FCM reales para pruebas
-  'c9_m4EPnSR-ENVT7QiZXVy:APA91bHOcH-3aoCsEVWQHJF1wbme6SoQlAAK3sU4waqF25u2KEzZCHSjxkDA8Tvn2m2i7QX-mAglBhTuZtTEhH4FsiJGeH_HF9VMPs6ACwCp0vTDyIKPZ7A',
-  'cyxSQ9OmQS2rWMuLWCHTtP:APA91bG6u6WS7SV6BQRixLIdOaLUpkvUY72pfjTMv3eJKLwzhRV3POYBauTwRd8jEVH58a0DDGSCegRz1dIohjxztKIinLF0COa4yQyOTrB-fkt-xJatQ28',
-  'cMGoA3WXTh2rS532B2fmzd:APA91bEvXh-QmShOqR7QaIBOp1MShVJOZZFyqiFZiua4ulfoYLNpbmXHEG50yxKlYscqvFbRfZcqUY-fXmdunOJpeuTlk88HQjEnnkxC4zTdrbJzmelaHGI'
+  'c0Hwk2wMSYmxCHq-kylFb_:APA91bF0wD4S0-U6nSp5LfWi54G_OpJjFFf4F7SsCBmK_ptG7ldUCGV-DpTyWC1Erj-54Hzex0dLPo1dpPKsgEEMy4-PIl9n1veKaoobPzzZHy__1I1CqpE',
 ];
 
 @Injectable()

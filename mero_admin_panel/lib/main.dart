@@ -1,5 +1,7 @@
 import 'dart:convert';
+import 'dart:async';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:http/http.dart' as http;
 
 void main() {
@@ -41,24 +43,30 @@ class _NotifyPageState extends State<NotifyPage> {
     }
     setState(() => _sending = true);
     try {
-      final resp = await http.post(
-        Uri.parse('http://localhost:3000/notify'),
-        headers: {'Content-Type': 'application/json'},
-        body: jsonEncode({'title': title, 'body': body}),
-      );
+      final resp = await http
+          .post(
+            Uri.parse('http://localhost:3000/notify'),
+            headers: {'Content-Type': 'application/json'},
+            body: jsonEncode({'title': title, 'body': body}),
+          )
+          .timeout(const Duration(seconds: 10));
       if (resp.statusCode >= 200 && resp.statusCode < 300) {
         ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(content: Text('Éxito: notificación enviada')),
+          const SnackBar(content: Text('✅ Notificación publicada')),
         );
       } else {
         ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text('Error ${resp.statusCode}: ${resp.body}')),
+          SnackBar(content: Text('❌ Error: ${resp.statusCode} ${resp.body}')),
         );
       }
+    } on TimeoutException catch (e) {
+      ScaffoldMessenger.of(
+        context,
+      ).showSnackBar(SnackBar(content: Text('❌ Error: $e')));
     } catch (e) {
       ScaffoldMessenger.of(
         context,
-      ).showSnackBar(SnackBar(content: Text('Error: $e')));
+      ).showSnackBar(SnackBar(content: Text('❌ Error: $e')));
     } finally {
       if (mounted) setState(() => _sending = false);
     }
@@ -77,6 +85,9 @@ class _NotifyPageState extends State<NotifyPage> {
             const SizedBox(height: 8),
             TextField(
               controller: _titleController,
+              maxLength: 50,
+              maxLengthEnforcement: MaxLengthEnforcement.enforced,
+              maxLines: 1,
               decoration: const InputDecoration(
                 border: OutlineInputBorder(),
                 hintText: 'Escribe el título',
@@ -90,6 +101,8 @@ class _NotifyPageState extends State<NotifyPage> {
                 controller: _bodyController,
                 maxLines: null,
                 expands: true,
+                maxLength: 200,
+                maxLengthEnforcement: MaxLengthEnforcement.enforced,
                 decoration: const InputDecoration(
                   border: OutlineInputBorder(),
                   hintText: 'Escribe el cuerpo del mensaje',
@@ -101,7 +114,7 @@ class _NotifyPageState extends State<NotifyPage> {
               width: double.infinity,
               child: ElevatedButton(
                 onPressed: _sending ? null : _send,
-                child: Text(_sending ? 'Enviando...' : 'Enviar notificación'),
+                child: Text(_sending ? 'Enviando...' : 'Publicar notificación'),
               ),
             ),
           ],
