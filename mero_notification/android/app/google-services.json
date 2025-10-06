@@ -1,0 +1,30 @@
+{
+  "project_info": {
+    "project_number": "121422833293",
+    "project_id": "meronotification",
+    "storage_bucket": "meronotification.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:121422833293:android:b3cc09834f3dc0410f24c4",
+        "android_client_info": {
+          "package_name": "com.example.mero_notification"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA0Hlm44mmHlKNzgVTJTSE-7EEBHjtlpJw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
+
